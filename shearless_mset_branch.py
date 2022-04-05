@@ -1,9 +1,5 @@
 import sys
 import os.path
-#sys.path.append(r"/Users/koda/PyModules/SimpleQmap")
-#sys.path.append(r"/Users/koda/PyModules")
-#sys.path.append(r"C:\PyModules\SimpleQmap")
-#sys.path.append(r"C:\PyModules")
 import numpy as np
 import matplotlib.pyplot as plt
 #import SimpleQmap as sq
@@ -396,7 +392,7 @@ def Release():#Get x1,y1(initialoriginx,initialoriginy) Iはpです
     #radius  = radius 
     print("radius = ",radius)
     i  = 0 
-    while abs(I_real) < maxI  :#でかい方向
+    while abs(I_real) < maxI  :
         i += 1
         print(theta)
         
@@ -465,8 +461,6 @@ def Release():#Get x1,y1(initialoriginx,initialoriginy) Iはpです
         if np.any(origin) == None or radius == None:
             break
         print("aradius = ",radius)
-        #現在の原点の位置を保存しておく.後でpの増減の符号が変わらない様に取らせる.減少か増加いずれかの方向に単調に動く様にとりはからう.
-        #次の原点を決める角の決定を行う.
         
         originsave(origin,origin_hist)
 
@@ -675,7 +669,7 @@ def decidepoint(points,func):#I.realの向きを考えて，
 
 
 
-def getpoint(origins,radius,pradius,cmap,switch):#少なくともこれは最適化しないとまずい.一番手間がかかる.いらねぇことに気づいた．
+def getpoint(origins,radius,pradius,cmap,switch):
     global orbitnumber,curvecount,x1,y1
     a = 0
     b = 0
@@ -709,7 +703,7 @@ def angle(vec1,vec2):#判定用の内積.
     if abs(cs) > 1:
         cs = - np.sign(cs) *  10 ** (-10) * 2
     return math.acos(cs)
-def curve_judge(origins,radius,origin):#次の原点が決まる前に、見直しをする.bisectionOndiskの後,p_hist保存の前.動くのが一回限りなので単なる応急処置.
+def curve_judge(origins,radius,origin):
     global p_hist
     print(radius)
     radius = stradius
@@ -1071,7 +1065,7 @@ def plotperiods(textpath):#その点から軌道に沿った作用の大きさ�
 
     #plt.semilogx()
     allpoints = [np.array([])]*2
-    allaxispoint = np.array([])#基準となる交点の数々.
+    allaxispoint = np.array([])
     iterates = text[:,5]
     initpointRe = text[:,10]
     initpointIm = text[:,11]
@@ -1097,7 +1091,7 @@ def plotperiods(textpath):#その点から軌道に沿った作用の大きさ�
     #plt.ylim(0.0,4.0)
     plt.title("a = {}, b = {},t = {} ".format(str(round(a_orb,3)),str(round(b_orb,3)),timestep), fontsize = 33)
     #plt.plot(initpointRe[0],initpointIm[0],"o", color = 'red')
-    for i in [1,4,5,6,7]:#それぞれの半径について．凡例を作るため。
+    for i in [1,4,5,6,7]:
         print(text[:,0])
         extractarray = text[text[:,0] == i,:]
         print(extractarray.shape)
@@ -1160,15 +1154,9 @@ mset()
 #plot2.main() 
 
 #plt.plot(seed[:,0],seed[:,1],',k',zorder = 1)
-#plt.plot(6.101014,0.57610,'o')
-#plt.xlim(0.,3.14)
-#plt.ylim(2.76,5.02)
-
 
 #textpath = 'initpoint_10_13_test14_a_{}_b_{}.txt'.format(str(round(a_orb,3)).replace('.','z'), str(round(b_orb,3)).replace('.','z'))
-#textpath = 'initpoint_10_13_test14_a_{}_b_{}.txt'.format(str(round(a_orb,3)).replace('.','z'), str(round(b_orb,3)).replace('.','z'))
 
 
-
-#fig.canvas.mpl_connect('button_press_event',onclick)#(なぜonkeyが使えないのか...)
+#fig.canvas.mpl_connect('button_press_event',onclick)
 #plt.show()
